@@ -6,8 +6,8 @@ export const Specials = () => {
   const [specialState] = useState(specials);
 
   return (
-    <div>
-      {specialState.map(item => <SpecialButton value={item} />)}
+    <div className="specials">
+      {specialState.map((item, index) => <SpecialButton value={item} key={index}/>)}
     </div>
   );
 };

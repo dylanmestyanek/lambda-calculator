@@ -1,8 +1,8 @@
 import React from "react";
 
 export const NumberButton = (props) => {
-  const { value } = props;
+  const { value, setTotal } = props;
   return (
-    <button value={value}>{value}</button>
+    <button value={value} onClick={() => setTotal(value)}>{value}</button>
   );
 };

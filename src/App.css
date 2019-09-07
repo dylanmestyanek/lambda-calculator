@@ -1,0 +1,67 @@
+/* #root {
+    background: rgb(175, 42, 42);
+    width: 400px;
+    margin: 0 auto;
+    padding: 2%;
+    border-radius: 8px;
+}
+
+.App{
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.App * {
+    border: 1px solid black;
+}
+
+.displayContainer {
+    background: black;
+    color: white;
+    height: 80px;
+    width: 300px;
+    text-align: right;
+    padding-right: 10px;
+    font-size: 3.0rem;
+    border-radius: 50px;
+    line-height: 80px;
+}
+
+.numbersContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.buttonsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;   
+}
+
+.specials {
+    width: 200px;
+}
+
+.numbers {
+    display: flex;
+    flex-wrap: wrap;
+    width: 200px;
+
+    background: pink;
+}
+
+.operators {
+    display: flex;
+    flex-direction: column;
+}
+
+.specials button,
+.numbers button,
+.operators button {
+    font-size: 1.4rem;
+    border-radius: 50%;
+    width: 60px;
+    padding: 8%;  
+} */
