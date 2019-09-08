@@ -18,16 +18,43 @@ function App() {
   // the "5" button, or the operator if they click one of those buttons) and then call your setter function to update state.
   // Don't forget to pass the functions (and any additional data needed) to the components as props
   let [totalState, setTotalState] = useState(0);
+  let [oldState, setOldState] = useState(0);
   let [operatorState, setOperatorState] = useState('');
 
   const setTotalFunc = (num) => {
-    setTotalState(totalState + num);
+    let regex = new RegExp(/[0 || + || - || * || /]/);
+    regex.test(totalState) ? setTotalState(totalState = num) : setTotalState(totalState += num);
+    console.log(oldState);
+    console.log(totalState);
+    console.log(operatorState)
   }
-
-  const addNumsFunc = (operator) => {
-    console.log(operatorState) 
-    setOperatorState(operator);
-  }
+  
+  const setOperatorFunc = (operator) => {
+    if (operator === "=") {
+      switch(operatorState) {
+        case '+':
+          setTotalState((+oldState) + (+totalState));
+          break;
+          case '-':
+            setTotalState((+oldState) - (+totalState));
+            break;
+            case '*':
+        setTotalState((+oldState) * (+totalState));
+        break;
+        case '/':
+          setTotalState((+oldState) / (+totalState));
+          break;
+        }
+        // setOperatorState('');
+      } else {
+        setOldState(oldState = (+totalState));
+        operatorState === '' && setTotalState(operator);
+        setOperatorState(operator);
+        console.log(oldState);
+        console.log(totalState);
+        console.log(operatorState)
+      }
+    }
 
   return (
     <div className="container">
@@ -39,9 +66,8 @@ function App() {
             <Specials />
             <Numbers setTotal={setTotalFunc} />
           </div>
-          <Operators addNums={addNumsFunc}/>
+          <Operators setOperator={setOperatorFunc}/>
         </div>
-        {/* STEP 4 - Render your components here and be sure to properly import/export all files */}
       </div>
     </div>
   );

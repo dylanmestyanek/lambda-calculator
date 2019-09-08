@@ -1,8 +1,8 @@
 import React from "react";
 
 export const SpecialButton = (props) => {
-  const { value } = props;
+  const { value, combineNums } = props;
   return (
-    <button value={value}>{value}</button>
+    <button value={value} onCLick={() => combineNums()}>{value}</button>
     );
 };

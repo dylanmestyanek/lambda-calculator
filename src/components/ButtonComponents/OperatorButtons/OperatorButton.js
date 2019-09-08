@@ -1,8 +1,8 @@
 import React from "react";
 
 export const OperatorButton = (props) => {
-  const { value, char, addNums} = props;
+  const { value, char, setOperator} = props;
   return (
-    <button value={value} onClick={() => addNums(value)}>{char}</button>
+    <button value={value} onClick={() => setOperator(value)}>{char}</button>
   );
 };

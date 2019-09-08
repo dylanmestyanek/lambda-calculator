@@ -4,10 +4,10 @@ import { OperatorButton } from "./OperatorButton";
 
 export const Operators = (props) => {
   const [operatorState] = useState(operators);
-  const { addNums } = props;
+  const { setOperator } = props;
   return (
     <div className="operators">
-      {operatorState.map((operator, index) => <OperatorButton addNums={addNums} value={operator.value} char={operator.char} key={index} />)}
+      {operatorState.map((operator, index) => <OperatorButton setOperator={setOperator} value={operator.value} char={operator.char} key={index} />)}
     </div>
   );
 };
