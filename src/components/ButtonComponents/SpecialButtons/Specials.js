@@ -4,10 +4,10 @@ import { SpecialButton } from "./SpecialButton";
 
 export const Specials = (props) => {
   const [specialState] = useState(specials);
-  const { combineNums } = props;
+  const { specialOperators } = props;
   return (
     <div className="specials">
-      {specialState.map((item, index) => <SpecialButton value={item} key={index} combineNums={combineNums} />)}
+      {specialState.map((item, index) => <SpecialButton value={item} key={index} specialOperators={specialOperators} />)}
     </div>
   );
 };

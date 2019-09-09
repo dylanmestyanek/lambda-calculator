@@ -22,37 +22,36 @@ function App() {
   let [operatorState, setOperatorState] = useState('');
 
   const setTotalFunc = (num) => {
-    let regex = new RegExp(/[0 || + || - || * || /]/);
-    regex.test(totalState) ? setTotalState(totalState = num) : setTotalState(totalState += num);
-    console.log(oldState);
-    console.log(totalState);
-    console.log(operatorState)
+    let regex = new RegExp(/[0||+||-||*||/]/);
+    regex.test(totalState) || operatorState == '' ? setTotalState(totalState = num) : setTotalState(totalState += num);
   }
   
+  const specialOperatorsFunc = (operator) => {
+    operator === 'C' && setTotalState(0);
+  }
+
   const setOperatorFunc = (operator) => {
     if (operator === "=") {
       switch(operatorState) {
         case '+':
           setTotalState((+oldState) + (+totalState));
           break;
-          case '-':
-            setTotalState((+oldState) - (+totalState));
-            break;
-            case '*':
-        setTotalState((+oldState) * (+totalState));
-        break;
+        case '-':
+          setTotalState((+oldState) - (-totalState));
+          break;
+        case '*':
+          setTotalState((+oldState) * (+totalState));
+          break;
         case '/':
           setTotalState((+oldState) / (+totalState));
           break;
         }
-        // setOperatorState('');
+        setOperatorState('');
       } else {
-        setOldState(oldState = (+totalState));
+        setOldState(totalState);
+        console.log(totalState)
         operatorState === '' && setTotalState(operator);
         setOperatorState(operator);
-        console.log(oldState);
-        console.log(totalState);
-        console.log(operatorState)
       }
     }
 
@@ -63,7 +62,7 @@ function App() {
         <Display value={totalState} />
         <div className="buttonsContainer">
           <div className="numbersContainer">
-            <Specials />
+            <Specials specialOperators={specialOperatorsFunc}/>
             <Numbers setTotal={setTotalFunc} />
           </div>
           <Operators setOperator={setOperatorFunc}/>
