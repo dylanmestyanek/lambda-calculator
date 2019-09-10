@@ -8,8 +8,7 @@ import Logo from "./components/DisplayComponents/Logo";
 import { Numbers } from "./components/ButtonComponents/NumberButtons/Numbers";
 import { Operators } from "./components/ButtonComponents/OperatorButtons/Operators";
 import { Specials } from "./components/ButtonComponents/SpecialButtons/Specials";
-import { Display } from './components/DisplayComponents/Display';
-import calculations from ".components/ButtonEffectFunctions/calculations";
+import { Display } from "./components/DisplayComponents/Display";
  
 
 function App() {
@@ -28,8 +27,6 @@ function App() {
     // If total is an operator, or zero (on page load), display the number you click on the screen
     // Otherwise, add the number clicked, to whatever is displayed on the screen
     regex.test(total) && resetCalc ? setTotal(total = num) : setTotal(total += num);
-
-    total.includes('.') && setTotal(total.replace('.' , '')); // trying to fix glitch of adding 100 decimals haha
     setResetCalc(false);
   }
   
@@ -46,10 +43,37 @@ function App() {
         break;
       case ('%'):
         setTotal(parseFloat(total * .01));
+        break;
+      default:
+        break;
     } 
   };
 
-
+  const calculations = (value) => {
+    if (value === "=") {
+      switch(operator) {
+        case '+':
+          setTotal((+oldTotal) + (+total));
+          break;
+        case '-':
+          setTotal((+oldTotal) - (+total));
+          break;
+        case '*':
+          setTotal((+oldTotal) * (+total));
+          break;
+        case '/':
+          setTotal((+oldTotal) / (+total));
+          break;
+        default:
+          break;
+        }
+        setOperator('');
+    } else {
+        setOldTotal(total);
+        setTotal('');
+        setOperator(value);
+    }
+};
   
   return (
     <div className="container">
