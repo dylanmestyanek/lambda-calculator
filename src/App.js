@@ -9,6 +9,7 @@ import { Numbers } from "./components/ButtonComponents/NumberButtons/Numbers";
 import { Operators } from "./components/ButtonComponents/OperatorButtons/Operators";
 import { Specials } from "./components/ButtonComponents/SpecialButtons/Specials";
 import { Display } from './components/DisplayComponents/Display';
+import calculations from ".components/ButtonEffectFunctions/calculations";
  
 
 function App() {
@@ -17,67 +18,50 @@ function App() {
   // Your functions should accept a parameter of the the item data being displayed to the DOM (ie - should recieve 5 if the user clicks on
   // the "5" button, or the operator if they click one of those buttons) and then call your setter function to update state.
   // Don't forget to pass the functions (and any additional data needed) to the components as props
-  let [totalState, setTotalState] = useState(0);
-  let [oldState, setOldState] = useState(0);
-  let [operatorState, setOperatorState] = useState('');
-  let [freshCalc, setFreshCalc] = useState(true);
+  let [total, setTotal] = useState(0);
+  let [oldTotal, setOldTotal] = useState(0);
+  let [operator, setOperator] = useState('');
+  let [resetCalc, setResetCalc] = useState(true);
 
   const setTotalFunc = (num) => {
     let regex = new RegExp(/[0||+||-||*||/]/);
-    regex.test(totalState) && freshCalc ? setTotalState(totalState = num) : setTotalState(totalState += num);
-    totalState.includes('.') && setTotalState(totalState.replace('.' , '')); // trying to fix glitch of adding 100 decimals haha
-    setFreshCalc(false);
+    // If total is an operator, or zero (on page load), display the number you click on the screen
+    // Otherwise, add the number clicked, to whatever is displayed on the screen
+    regex.test(total) && resetCalc ? setTotal(total = num) : setTotal(total += num);
+
+    total.includes('.') && setTotal(total.replace('.' , '')); // trying to fix glitch of adding 100 decimals haha
+    setResetCalc(false);
   }
   
-  const specialOperatorsFunc = (operator) => {
-    switch(operator) {
+  // Handles special buttons: 
+  const specialOperators = (value) => {
+    switch(value) {
       case ('C'):
-         setTotalState(0);
-         setOldState(0);
+         setTotal(0);
+         setOldTotal(0);
+         setResetCalc(true);
          break;
       case ('+/-'):
-        totalState > 0 ? setTotalState(-totalState) : setTotalState(Math.abs(totalState))
+        total > 0 ? setTotal(-total) : setTotal(Math.abs(total))
         break;
       case ('%'):
-        setTotalState(parseFloat(totalState * .01));
+        setTotal(parseFloat(total * .01));
     } 
   };
 
-  const setOperatorFunc = (operator) => {
-    if (operator === "=") {
-      switch(operatorState) {
-        case '+':
-          setTotalState((+oldState) + (+totalState));
-          break;
-        case '-':
-          setTotalState((+oldState) - (+totalState));
-          break;
-        case '*':
-          setTotalState((+oldState) * (+totalState));
-          break;
-        case '/':
-          setTotalState((+oldState) / (+totalState));
-          break;
-        }
-        setOperatorState('');
-      } else {
-        setOldState(totalState);
-        setTotalState('');
-        setOperatorState(operator);
-      }
-    }
 
+  
   return (
     <div className="container">
       <Logo />
       <div className="App">
-        <Display value={totalState} />
+        <Display value={total} />
         <div className="buttonsContainer">
           <div className="numbersContainer">
-            <Specials specialOperators={specialOperatorsFunc}/>
+            <Specials specialOperators={specialOperators}/>
             <Numbers setTotal={setTotalFunc} />
           </div>
-          <Operators setOperator={setOperatorFunc}/>
+          <Operators calculations={calculations}/>
         </div>
       </div>
     </div>
