@@ -20,15 +20,28 @@ function App() {
   let [totalState, setTotalState] = useState(0);
   let [oldState, setOldState] = useState(0);
   let [operatorState, setOperatorState] = useState('');
+  let [freshCalc, setFreshCalc] = useState(true);
 
   const setTotalFunc = (num) => {
     let regex = new RegExp(/[0||+||-||*||/]/);
-    regex.test(totalState) || operatorState == '' ? setTotalState(totalState = num) : setTotalState(totalState += num);
+    regex.test(totalState) && freshCalc ? setTotalState(totalState = num) : setTotalState(totalState += num);
+    totalState.includes('.') && setTotalState(totalState.replace('.' , '')); // trying to fix glitch of adding 100 decimals haha
+    setFreshCalc(false);
   }
   
   const specialOperatorsFunc = (operator) => {
-    operator === 'C' && setTotalState(0);
-  }
+    switch(operator) {
+      case ('C'):
+         setTotalState(0);
+         setOldState(0);
+         break;
+      case ('+/-'):
+        totalState > 0 ? setTotalState(-totalState) : setTotalState(Math.abs(totalState))
+        break;
+      case ('%'):
+        setTotalState(parseFloat(totalState * .01));
+    } 
+  };
 
   const setOperatorFunc = (operator) => {
     if (operator === "=") {
@@ -37,7 +50,7 @@ function App() {
           setTotalState((+oldState) + (+totalState));
           break;
         case '-':
-          setTotalState((+oldState) - (-totalState));
+          setTotalState((+oldState) - (+totalState));
           break;
         case '*':
           setTotalState((+oldState) * (+totalState));
@@ -49,8 +62,7 @@ function App() {
         setOperatorState('');
       } else {
         setOldState(totalState);
-        console.log(totalState)
-        operatorState === '' && setTotalState(operator);
+        setTotalState('');
         setOperatorState(operator);
       }
     }
