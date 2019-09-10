@@ -7,7 +7,7 @@ export const Numbers = (props) => {
   const { setTotal } = props;
   return (
     <div className="numbers">
-       {numberState.map((number,index) => <NumberButton value={number} key={index} id={`${index}`} setTotal={setTotal} />)}
+       {numberState.map((number,index) => <NumberButton value={number} key={index} setTotal={setTotal} />)}
     </div>
   );
 };
