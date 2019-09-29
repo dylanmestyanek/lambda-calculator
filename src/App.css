@@ -1,0 +1,108 @@
+#root {
+    background:#bb1233;
+    width: 400px;
+    margin: 0 auto;
+    padding: 2% 1%;
+    border-radius: 20px;
+}
+
+.App{
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.displayContainer {
+    background: #2d2829;
+    color: white;
+    height: 80px;
+    width: 300px;
+    margin: 0 auto;
+    text-align: right;
+    padding-right: 10px;
+    font-size: 3.0rem;
+    border-radius: 50px;
+    line-height: 80px;
+}
+
+.numbersContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.buttonsContainer {
+    width: 100%;
+    margin-top: 15px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;   
+}
+
+.specials button,
+.numbers button {
+    font-size: 1.4rem;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    /* padding: 6.5%;   */
+    border: none;
+    box-shadow: 0px 2px 2px 1px black;
+}
+
+/* Special Buttons */
+.specials {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 250px;
+    height: 70px;
+}
+
+.specials button {
+    background: #2061b0;
+    color: white;
+}
+
+/*  Number Buttons  */
+.numbers {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    width: 250px;
+    height: 300px;
+}
+
+.numbers button {
+    background:#113c78;
+    color: white;
+    margin: 0 10px;
+}
+
+.numbers button:nth-last-child(2) {
+    width: 150px;
+    border-radius: 30px;
+}
+
+/* Operator Buttons */
+.operators {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 358px;
+    padding: 5px 0;
+    margin-left: 5px;
+}
+
+.operators button {
+    font-size: 1.4rem;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    padding: 12%;
+    background: #3db5e5;
+    color: white;
+    box-shadow: 0px 2px 2px 1px black;
+    border: none;
+}
